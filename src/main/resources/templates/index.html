@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,179 +31,27 @@
         </ul>
     </nav>
     <main>
-        <article class="prompt-card" id="card-neon-city">
+        <article class="prompt-card" th:each="prompt : ${prompts}">
+
             <div class="card-header image-card">
-                <img class="card-image" src="/img/Cyberpunk.png" alt="Neon Cyberpunk City">
+                <img class="card-image" th:src="${prompt.imageUrl}" th:alt="${prompt.title}">
                 <div class="card-overlay-icon image-overlay-icon"></div>
             </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="neon-indicator"></div>
-                    <h2 class="card-title">Neon Cyberpunk City</h2>
-                </div>
-                <p class="card-desc">A futuristic neon-lit cyberpunk cityscape at night with flying cars, holographic billboards, rain...</p>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">Design</li>
-                    <li class="tag">Concept</li>
-                    <li class="tag">Sci-Fi</li>
-                </ul>
-            </div>
-        </article>
 
-        <article class="prompt-card" id="card-react-code">
-            <div class="card-header text-card">
-                <div class="card-overlay-icon bookmark-overlay-icon"></div>
-            </div>
             <div class="card-body">
                 <div class="title-row">
-                    <div class="ai-indicator" id="react-indicator"></div>
-                    <h2 class="card-title">React Code Reviewer</h2>
+                    <div class="ai-indicator" th:id="${prompt.aiModel} + '-indicator'"></div>
+                    <h2 class="card-title" th:text="${prompt.title}">Заголовок</h2>
                 </div>
-                <div class="text-card-description-icon-container">
-                    <p class="card-desc">You are an expert React developer. Review the following code for best practices, performance, an...</p>
-                </div>
+                <p class="card-desc" th:text="${prompt.description}">Описание...</p>
             </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">Frontend</li>
-                    <li class="tag">React</li>
-                    <li class="tag">Code Review</li>
-                </ul>
-            </div>
-        </article>
 
-        <article class="prompt-card" id="card-abstract-fluid">
-            <div class="card-header image-card">
-                <div class="card-image"></div>
-                <img class="card-image" src="/img/fluid_art.png" alt="Fluid Art">
-                <div class="card-overlay-icon image-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="fluid-indicator"></div>
-                    <h2 class="card-title">Abstract Fluid Art</h2>
-                </div>
-                <p class="card-desc">Vibrant abstract fluid art with swirling colors, smooth gradients, flowing shapes, dynamic...</p>
-            </div>
             <div class="card-footer">
                 <ul class="tags">
-                    <li class="tag">Abstract</li>
-                    <li class="tag">Art</li>
-                    <li class="tag">Colorful</li>
+                    <li class="tag" th:each="tag : ${#strings.arraySplit(prompt.tags, ',')}" th:text="${tag}">Тег</li>
                 </ul>
             </div>
-        </article>
 
-        <article class="prompt-card" id="card-api-doc">
-            <div class="card-header text-card">
-                <div class="card-overlay-icon bookmark-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="api-indicator"></div>
-                    <h2 class="card-title">API Documentation Generator</h2>
-                </div>
-                <div class="text-card-description-icon-container">
-                    <p class="card-desc">Create comprehensive API documentation for the following endpoints. Include request/response...</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">Documentation</li>
-                    <li class="tag">API</li>
-                    <li class="tag">Backend</li>
-                </ul>
-            </div>
-        </article>
-
-        <article class="prompt-card" id="card-surreal-dream">
-            <div class="card-header image-card">
-                <div class="card-image"></div>
-                <img class="card-image" src="/img/dreamscape.png" alt="Surreal Dreamscape">
-                <div class="card-overlay-icon image-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="surreal-indicator"></div>
-                    <h2 class="card-title">Surreal Dreamscape</h2>
-                </div>
-                <p class="card-desc">Ethereal surreal landscape with floating islands, impossible geometry, dreamlike atmosphere, soft...</p>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">Fantasy</li>
-                    <li class="tag">Surreal</li>
-                    <li class="tag">Landscape</li>
-                </ul>
-            </div>
-        </article>
-
-        <article class="prompt-card" id="card-typescript-helper">
-            <div class="card-header text-card">
-                <div class="card-overlay-icon bookmark-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="typescript-indicator"></div>
-                    <h2 class="card-title">TypeScript Type Helper</h2>
-                </div>
-                <div class="text-card-description-icon-container">
-                    <p class="card-desc">Generate TypeScript types and interfaces for the following data structure. Include proper generic...</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">TypeScript</li>
-                    <li class="tag">Types</li>
-                    <li class="tag">Utilities</li>
-                </ul>
-            </div>
-        </article>
-
-        <article class="prompt-card" id="card-geometric-min">
-            <div class="card-header image-card">
-                <div class="card-image"></div>
-                <img class="card-image" src="/img/geometric.png" alt="Geometric Minimalism">
-                <div class="card-overlay-icon image-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="minimalism-indicator"></div>
-                    <h2 class="card-title">Geometric Minimalism</h2>
-                </div>
-                <p class="card-desc">Clean minimalist design with geometric patterns, sharp lines, monochromatic color scheme, negative...</p>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">Minimalist</li>
-                    <li class="tag">Design</li>
-                    <li class="tag">Geometric</li>
-                </ul>
-            </div>
-        </article>
-
-        <article class="prompt-card" id="card-css-expert">
-            <div class="card-header text-card">
-                <div class="card-overlay-icon bookmark-overlay-icon"></div>
-            </div>
-            <div class="card-body">
-                <div class="title-row">
-                    <div class="ai-indicator" id="css-indicator"></div>
-                    <h2 class="card-title">CSS Animation Expert</h2>
-                </div>
-                <div class="text-card-description-icon-container">
-                    <p class="card-desc">Create smooth CSS animations for micro-interactions. Focus on performance, use transform...</p>
-                </div>
-            </div>
-            <div class="card-footer">
-                <ul class="tags">
-                    <li class="tag">CSS</li>
-                    <li class="tag">Animation</li>
-                    <li class="tag">Frontend</li>
-                </ul>
-            </div>
         </article>
     </main>
 </div>
